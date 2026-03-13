@@ -22,7 +22,7 @@ RUN cd /comfyui/custom_nodes && \
 # ============================================
 # DOWNLOAD MODELS
 # ============================================
-
+#hehe
 # Z Image Turbo UNET Model (place in unet folder)
 # NOTE: Replace with actual download URL - this model needs to be sourced
 RUN comfy model download \
