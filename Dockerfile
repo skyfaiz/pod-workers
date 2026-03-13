@@ -1,6 +1,6 @@
 # Z Image Turbo v8 - Ultra-Stable Build
 # Based on the official worker-comfyui base image
-FROM runpod/worker-comfyui:5.1.0-base
+FROM runpod/worker-comfyui:5.0.0-base
 
 # ============================================
 # 1. ENVIRONMENT & SECURITY CONFIG
