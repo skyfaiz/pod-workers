@@ -57,10 +57,12 @@ RUN comfy model download \
 
 # Create loras directory
 RUN mkdir -p /comfyui/models/loras
-
+RUN curl -L -H "Authorization: Bearer d8b952eca7f0b07f6df0a6f4095db084" \
+    "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor" \
+    -o /comfyui/models/loras/NiceGirls_UltraReal.safetensors
 # NiceGirls_UltraReal LoRA from CivitAI
-RUN curl -L -o /comfyui/models/loras/NiceGirls_UltraReal_v1.0_Z-Image_Turbo.safetensors \
-    "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor&token=d8b952eca7f0b07f6df0a6f4095db084"
+#RUN curl -L -o /comfyui/models/loras/NiceGirls_UltraReal_v1.0_Z-Image_Turbo.safetensors \
+#   "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor&token=d8b952eca7f0b07f6df0a6f4095db084"
 
 # Copy local LoRAs (baked into image)
 COPY loras/ /comfyui/models/loras/
