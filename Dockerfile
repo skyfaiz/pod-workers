@@ -1,30 +1,30 @@
-# Z Image Turbo v7 - Hardened Build
+# Z Image Turbo v8 - Ultra-Stable Build
 # Based on the official worker-comfyui base image
 FROM runpod/worker-comfyui:5.1.0-base
 
 # ============================================
 # 1. ENVIRONMENT & SECURITY CONFIG
 # ============================================
-# Set security to weak as requested
 ENV COMFYUI_SECURITY_LEVEL=weak
 ENV COMFY_HOME=/comfyui
 
 # ============================================
-# 2. INSTALL CUSTOM NODES (MANUAL GIT CLONE)
+# 2. INSTALL CUSTOM NODES (SEPARATED STEPS)
 # ============================================
-# We do this first so the build fails fast if there is a network issue.
-RUN mkdir -p /comfyui/custom_nodes && \
-    git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Apex-Artist.git /comfyui/custom_nodes/ComfyUI-Apex-Artist && \
-    git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy && \
-    git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Qwen-VL-Chat.git /comfyui/custom_nodes/comfyui-qwenvl && \
-    git clone https://github.com/AIGODLIKE/ComfyUI-BlenderAI-node.git /comfyui/custom_nodes/seedvr2_videoupscaler && \
-    git clone https://github.com/RamonGuthrie/ComfyUI-RBG-SmartSeedVariance.git /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance
+# We create the folder first to ensure it's there for all following steps
+RUN mkdir -p /comfyui/custom_nodes
 
-# Install specific node requirements
-RUN pip install --no-cache-dir \
-    -r /comfyui/custom_nodes/comfyui-qwenvl/requirements.txt \
-    -r /comfyui/custom_nodes/seedvr2_videoupscaler/requirements.txt \
-    -r /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance/requirements.txt || true
+# Each clone is now its own independent step for maximum stability
+RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Apex-Artist.git /comfyui/custom_nodes/ComfyUI-Apex-Artist
+RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy
+RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Qwen-VL-Chat.git /comfyui/custom_nodes/comfyui-qwenvl
+RUN git clone https://github.com/AIGODLIKE/ComfyUI-BlenderAI-node.git /comfyui/custom_nodes/seedvr2_videoupscaler
+RUN git clone https://github.com/RamonGuthrie/ComfyUI-RBG-SmartSeedVariance.git /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance
+
+# Install requirements for the nodes individually
+RUN pip install --no-cache-dir -r /comfyui/custom_nodes/comfyui-qwenvl/requirements.txt || true
+RUN pip install --no-cache-dir -r /comfyui/custom_nodes/seedvr2_videoupscaler/requirements.txt || true
+RUN pip install --no-cache-dir -r /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance/requirements.txt || true
 
 # ============================================
 # 3. DOWNLOAD MODELS
@@ -45,20 +45,19 @@ RUN comfy model download \
 # VAE Model (ae.safetensors)
 COPY models/vae/ae.safetensors /comfyui/models/vae/ae.safetensors
 
-# SeedVR2 DiT Model
+# SeedVR2 Models
 RUN comfy model download \
     --url https://huggingface.co/AInVFX/SeedVR2_comfyUI/resolve/main/seedvr2_ema_7b_fp8_e4m3fn_mixed_block35_fp16.safetensors \
     --relative-path models/diffusion_models \
     --filename seedvr2_ema_7b_fp8_e4m3fn_mixed_block35_fp16.safetensors
 
-# SeedVR2 VAE Model
 RUN comfy model download \
     --url https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/ema_vae_fp16.safetensors \
     --relative-path models/vae \
     --filename ema_vae_fp16.safetensors
 
 # ============================================
-# 4. DOWNLOAD LoRA MODELS
+# 4. DOWNLOAD LoRA MODELS & ASSETS
 # ============================================
 RUN mkdir -p /comfyui/models/loras
 RUN curl -L -H "Authorization: Bearer d8b952eca7f0b07f6df0a6f4095db084" \
