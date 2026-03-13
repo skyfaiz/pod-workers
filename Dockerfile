@@ -8,7 +8,7 @@ FROM runpod/worker-comfyui:5.1.0-base
 ENV COMFYUI_SECURITY_LEVEL=weak
 ENV COMFY_HOME=/comfyui
 
-# ============================================
+# =========================================
 # 2. INSTALL CUSTOM NODES (SEPARATED STEPS)
 # ============================================
 # We create the folder first to ensure it's there for all following steps
