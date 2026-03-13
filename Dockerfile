@@ -12,7 +12,7 @@ ENV COMFY_HOME=/comfyui
 # ============================================
 # INSTALL CUSTOM NODES (MANUAL GIT CLONE)
 # ============================================
-
+RUN mkdir -p /comfyui/custom_nodes
 # We clone these directly to ensure the correct folder structure
 RUN cd /comfyui/custom_nodes && \
     git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Apex-Artist.git && \
