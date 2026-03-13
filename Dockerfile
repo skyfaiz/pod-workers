@@ -27,7 +27,7 @@ RUN cd /comfyui/custom_nodes && \
 # NOTE: Replace with actual download URL - this model needs to be sourced
 RUN comfy model download \
     --url https://huggingface.co/Kijai/z-image-turbo-comfyui/resolve/main/z_image_turbo_bf16.safetensors \
-    --relative-path models/unet \
+    --relative-path models/diffusion_models \
     --filename z_image_turbo_bf16.safetensors
 
 # CLIP Model - Qwen 3 4B for Lumina2
