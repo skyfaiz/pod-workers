@@ -14,18 +14,27 @@ ENV COMFY_HOME=/comfyui
 # We create the folder first to ensure it's there for all following steps
 RUN mkdir -p /comfyui/custom_nodes
 
-# Each clone is now its own independent step for maximum stability
+RUN rm -rf /comfyui/custom_nodes/ComfyUI-Apex-Artist
 RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Apex-Artist.git /comfyui/custom_nodes/ComfyUI-Apex-Artist
+
+RUN rm -rf /comfyui/custom_nodes/rgthree-comfy
 RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy
+
+RUN rm -rf /comfyui/custom_nodes/comfyui-qwenvl
 RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Qwen-VL-Chat.git /comfyui/custom_nodes/comfyui-qwenvl
+
+RUN rm -rf /comfyui/custom_nodes/seedvr2_videoupscaler
 RUN git clone https://github.com/AIGODLIKE/ComfyUI-BlenderAI-node.git /comfyui/custom_nodes/seedvr2_videoupscaler
+
+RUN rm -rf /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance
 RUN git clone https://github.com/RamonGuthrie/ComfyUI-RBG-SmartSeedVariance.git /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance
 
-# Install requirements for the nodes individually
+# ============================================
+# 3. INSTALL REQUIREMENTS
+# ============================================
 RUN pip install --no-cache-dir -r /comfyui/custom_nodes/comfyui-qwenvl/requirements.txt || true
 RUN pip install --no-cache-dir -r /comfyui/custom_nodes/seedvr2_videoupscaler/requirements.txt || true
 RUN pip install --no-cache-dir -r /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVariance/requirements.txt || true
-
 # ============================================
 # 3. DOWNLOAD MODELS
 # ============================================
