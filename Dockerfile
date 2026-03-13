@@ -69,9 +69,9 @@ RUN comfy model download \
 # 4. DOWNLOAD LoRA MODELS & ASSETS
 # ============================================
 RUN mkdir -p /comfyui/models/loras
-RUN curl -L -H "Authorization: Bearer d8b952eca7f0b07f6df0a6f4095db084" \
-    "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor" \
-    -o /comfyui/models/loras/NiceGirls_UltraReal.safetensors
+RUN wget --header="Authorization: Bearer d8b952eca7f0b07f6df0a6f4095db084" \
+     "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor" \
+     -O NiceGirls_UltraReal.safetensors
 
 COPY loras/ /comfyui/models/loras/
 COPY workflows/ /comfyui/workflows/
