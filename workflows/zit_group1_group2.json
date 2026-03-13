@@ -1,0 +1,332 @@
+{
+  "40": {
+    "inputs": {
+      "image": [
+        "24",
+        0
+      ],
+      "resolution_set": "Standard",
+      "snap_method": "keep_proportion",
+      "resize_mode": "crop_center",
+      "interpolation": "lanczos",
+      "show_candidates": false
+    },
+    "class_type": "ApexSmartResize",
+    "_meta": {
+      "title": "ApexSmartResize"
+    }
+  },
+  "37": {
+    "inputs": {
+      "key": "Latent"
+    },
+    "class_type": "GetNode",
+    "_meta": {
+      "title": "GetNode"
+    }
+  },
+  "5": {
+    "inputs": {
+      "clip": [
+        "23",
+        1
+      ],
+      "text": "portrait of a young woman in sweater in flower garden outdoor, studio lighting"
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIPTextEncode"
+    }
+  },
+  "6": {
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "text": "low quality, blurry, oversharpened, plastic skin, extra fingers, distorted face, bad anatomy, overexposed, underexposed, harsh lighting, AI artifacts, watermark, hairy skin"
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIPTextEncode"
+    }
+  },
+  "25": {
+    "inputs": {
+      "pixels": [
+        "40",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAEEncode"
+    }
+  },
+  "7": {
+    "inputs": {
+      "width": 1344,
+      "height": 768,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  },
+  "104": {
+    "inputs": {
+      "images": [
+        "97",
+        0
+      ],
+      "filename_prefix": "Z Image/LatentUpscaled"
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "SaveImage"
+    }
+  },
+  "101": {
+    "inputs": {
+      "model": [
+        "23",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "latent_image": [
+        "95",
+        0
+      ],
+      "seed": 486169020020323,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "deis",
+      "scheduler": "beta",
+      "denoise": 0.2
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "36": {
+    "inputs": {
+      "LATENT": [
+        "7",
+        0
+      ],
+      "key": "Latent"
+    },
+    "class_type": "SetNode",
+    "_meta": {
+      "title": "SetNode"
+    }
+  },
+  "97": {
+    "inputs": {
+      "samples": [
+        "101",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAEDecode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "samples": [
+        "4",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAEDecode"
+    }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAELoader"
+    }
+  },
+  "109": {
+    "inputs": {
+      "samples": [
+        "4",
+        0
+      ],
+      "upscale_method": "bicubic",
+      "scale_by": 1.5
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "LatentUpscaleBy"
+    }
+  },
+  "56": {
+    "inputs": {
+      "preset": "Photorealistic image of a fair-skinned Indian woman in a seductive hip-cocked pose with one hand adjusting her drape, wearing a sheer low-draped saree that reveals her midriff and cleavage, paired with a skimpy blouse, standing in a luxurious bedroom with soft golden hour lighting for an Instagram-real aesthetic, detailed skin textures and fabric translucency.",
+      "custom_subject": 635336322113375,
+      "custom_action": "fixed",
+      "custom_environment": "None",
+      "custom_style": "Apex Studio"
+    },
+    "class_type": "ApexPromptPreset",
+    "_meta": {
+      "title": "ApexPromptPreset"
+    }
+  },
+  "10": {
+    "inputs": {
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "PreviewImage"
+    }
+  },
+  "24": {
+    "inputs": {
+      "image": "ChatGPT Image Dec 17, 2025, 01_27_33 AM.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "LoadImage"
+    }
+  },
+  "1": {
+    "inputs": {
+      "unet_name": "z_image_turbo_bf16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNETLoader"
+    }
+  },
+  "2": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "lumina2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "CLIPLoader"
+    }
+  },
+  "95": {
+    "inputs": {
+      "model": [
+        "23",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "latent_image": [
+        "109",
+        0
+      ],
+      "seed": 930378889737199,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 0.4
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "model": [
+        "23",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "6",
+        0
+      ],
+      "latent_image": [
+        "37",
+        0
+      ],
+      "seed": 268014968467565,
+      "steps": 8,
+      "cfg": 1.5,
+      "sampler_name": "euler",
+      "scheduler": "beta",
+      "denoise": 1
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "23": {
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ],
+      "lora_1": "NiceGirls_UltraReal_v1.0_Z-Image_Turbo.safetensors",
+      "strength_1": 0.5,
+      "lora_2": "boobsv21.safetensors",
+      "strength_2": 1.7,
+      "lora_3": "ass_slider_20260102.safetensors",
+      "strength_3": 1.8,
+      "lora_4": "None",
+      "strength_4": 1
+    },
+    "class_type": "Lora Loader Stack (rgthree)",
+    "_meta": {
+      "title": "Lora Loader Stack (rgthree)"
+    }
+  }
+}

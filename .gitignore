@@ -1,0 +1,32 @@
+# ===========================================
+# Z Image Turbo Worker - Strict GitHub Ignore
+# ===========================================
+
+# 1. Ignore everything by default
+*
+
+# 2. Allow the .gitignore itself
+!.gitignore
+
+# 3. Allow Dockerfile
+!Dockerfile
+
+# 4. Allow Workflows
+!workflows/
+!workflows/zit_group1_only.json
+!workflows/zit_group1_group2.json
+!workflows/zit_all_groups.json
+
+# 5. Allow LoRAs
+!loras/
+!loras/boobsv21.safetensors
+!loras/ass_slider_20260102.safetensors
+
+# 6. Allow VAE Model
+!models/
+!models/vae/
+!models/vae/ae.safetensors
+
+# 7. Allow Source (Required for GitHub Integration)
+!src/
+!src/handler.py
