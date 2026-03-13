@@ -15,13 +15,13 @@ ENV COMFY_HOME=/comfyui
 RUN mkdir -p /comfyui/custom_nodes
 
 RUN rm -rf /comfyui/custom_nodes/ComfyUI-Apex-Artist
-RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Apex-Artist.git /comfyui/custom_nodes/ComfyUI-Apex-Artist
+RUN git clone https://github.com/ApexArtist/comfyui-apex-artist.git /comfyui/custom_nodes/ComfyUI-Apex-Artist
 
 RUN rm -rf /comfyui/custom_nodes/rgthree-comfy
 RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy
 
 RUN rm -rf /comfyui/custom_nodes/comfyui-qwenvl
-RUN git clone https://github.com/ZHO-ZHO-ZHO/ComfyUI-Qwen-VL-Chat.git /comfyui/custom_nodes/comfyui-qwenvl
+RUN git clone https://github.com/1038lab/ComfyUI-QwenVL.git /comfyui/custom_nodes/comfyui-qwenvl
 
 RUN rm -rf /comfyui/custom_nodes/seedvr2_videoupscaler
 RUN git clone https://github.com/AIGODLIKE/ComfyUI-BlenderAI-node.git /comfyui/custom_nodes/seedvr2_videoupscaler
