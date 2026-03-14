@@ -42,7 +42,7 @@ RUN pip install --no-cache-dir -r /comfyui/custom_nodes/ComfyUI-RBG-SmartSeedVar
 # Z Image Turbo UNET Model
 RUN comfy model download \
     --url https://huggingface.co/Kijai/z-image-turbo-comfyui/resolve/main/z_image_turbo_bf16.safetensors \
-    --relative-path models/diffusion_models \
+    --relative-path models/unet \
     --filename z_image_turbo_bf16.safetensors
 
 # CLIP Model - Qwen 3 4B for Lumina2
@@ -71,7 +71,7 @@ RUN comfy model download \
 RUN mkdir -p /comfyui/models/loras
 RUN wget --header="Authorization: Bearer d8b952eca7f0b07f6df0a6f4095db084" \
      "https://civitai.com/api/download/models/2465980?type=Model&format=SafeTensor" \
-     -O NiceGirls_UltraReal.safetensors
+     -O /comfyui/models/loras/NiceGirls_UltraReal_v1.0_Z-Image_Turbo.safetensors
 
 COPY loras/ /comfyui/models/loras/
 COPY workflows/ /comfyui/workflows/
